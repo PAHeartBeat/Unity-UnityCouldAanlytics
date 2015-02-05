@@ -109,6 +109,11 @@ extern "C" {
     
     const char* UnityEngine_Cloud_GetAppInstallMode()
     {
+#if TARGET_IPHONE_SIMULATOR
+        NSString* value = @"simulator";
+#else
+        NSString* value = @"store";
+        
         if (mobileProvision==nil)
         {
             if(lookedForMobileProvision)
@@ -119,12 +124,7 @@ extern "C" {
                 return NULL;
             [mobileProvision RETAIN];
         }
-        
-#if TARGET_IPHONE_SIMULATOR
-        NSString* value = @"simulator";
-#else
-        NSString* value = @"store";
-#endif
+
         if ([mobileProvision count])
         {
             if ([[mobileProvision objectForKey:@"ProvisionsAllDevices"] boolValue])
@@ -139,7 +139,9 @@ extern "C" {
                     value = @"adhoc";
             }
         }
+#endif
         return [UnityEngineCloudUtil makeStringCopy:value];
+        
     }
     
     const char* UnityEngine_Cloud_GetAppVersion()

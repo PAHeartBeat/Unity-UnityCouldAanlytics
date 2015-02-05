@@ -19,22 +19,46 @@ namespace UnityEngine.Cloud.Analytics
 
 		public override string appVersion
 		{
-			get { return UnityEngine_Cloud_GetAppVersion(); }
+			get { 
+				try{
+					return UnityEngine_Cloud_GetAppVersion(); 
+				}catch(System.Exception){
+					return "UNKNOWN";
+				}
+			}
 		}
 
 		public override string appBundleIdentifier
 		{
-			get { return UnityEngine_Cloud_GetBundleIdentifier(); }
+			get { 
+				try{
+					return UnityEngine_Cloud_GetBundleIdentifier(); 
+				}catch(System.Exception){
+					return "UNKNOWN";
+				}
+			}
 		}
 
 		public override string appInstallMode
 		{
-			get { return UnityEngine_Cloud_GetAppInstallMode(); }
+			get { 
+				try{
+					return UnityEngine_Cloud_GetAppInstallMode(); 
+				}catch(System.Exception){
+					return "UNKNOWN";
+				}
+			}
 		}
 		
 		public override bool isRootedOrJailbroken
 		{
-			get { return UnityEngine_Cloud_IsJailbroken(); }
+			get { 
+				try{
+					return UnityEngine_Cloud_IsJailbroken(); 
+				}catch(Exception){
+					return false;
+				}
+			}
 		}		
 	}
 }
